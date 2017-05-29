@@ -10,14 +10,19 @@ public class Restaurant {
     private String mName;
     private String mPhone;
     private String mWebsite;
-    private String mRating;
+    private double mRating;
     private String mImageUrl;
     private ArrayList<String> mAddress = new ArrayList<>();
+    private double mLatitude;
+    private double mLongitude;
+    private ArrayList<String> mCategories = new ArrayList<>();
 
     public Restaurant(String name, String phone, String website,
-                      double rating, String imageUrl, ArrayList<String> categories) {
+                      double rating, String imageUrl, ArrayList<String> address,
+                      double latitude, double longitude, ArrayList<String> categories) {
         this.mName = name;
         this.mPhone = phone;
+        this.mWebsite = website;
         this.mRating = rating;
         this.mImageUrl = imageUrl;
         this.mAddress = address;
@@ -62,4 +67,3 @@ public class Restaurant {
         return mCategories;
     }
 }
-
