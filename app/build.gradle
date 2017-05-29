@@ -25,6 +25,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        it.buildConfigField 'String', 'YELP_CLIENT_ID', YelpClientId
+        it.buildConfigField 'String', 'YELP_CLIENT_SECRET', YelpClientSecret
+        it.buildConfigField 'String', 'YELP_ACCESS_TOKEN', YelpAccessToken
+    }
+
 }
 
 dependencies {
