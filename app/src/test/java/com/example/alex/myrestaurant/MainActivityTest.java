@@ -6,6 +6,8 @@ import android.support.graphics.drawable.animated.BuildConfig;
 import android.widget.TextView;
 
 
+import com.example.alex.myrestaurant.ui.MainActivity;
+import com.example.alex.myrestaurant.ui.RestaurantsActivity;
 
 import org.junit.Before;
 import org.junit.Test;

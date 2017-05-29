@@ -2,6 +2,8 @@ package com.example.alex.myrestaurant;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.example.alex.myrestaurant.ui.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 
