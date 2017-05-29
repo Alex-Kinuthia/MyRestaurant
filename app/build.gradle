@@ -26,9 +26,9 @@ android {
         }
     }
     buildTypes.each {
-        it.buildConfigField 'String', 'YELP_CLIENT_ID', YelpClientId
-        it.buildConfigField 'String', 'YELP_CLIENT_SECRET', YelpClientSecret
-        it.buildConfigField 'String', 'YELP_ACCESS_TOKEN', YelpAccessToken
+        it.buildConfigField 'String', 'YELP_CONSUMER_KEY', YelpConsumerKey
+        it.buildConfigField 'String', 'YELP_CONSUMER_SECRET', YelpConsumerSecret
+        it.buildConfigField 'String', 'YELP_TOKEN', YelpToken
     }
 
 }
@@ -38,6 +38,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
     testCompile 'org.robolectric:robolectric:3.0'
     testCompile 'org.robolectric:shadows-support-v4:3.0'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2') {
