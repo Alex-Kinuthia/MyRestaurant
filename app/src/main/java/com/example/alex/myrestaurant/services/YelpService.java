@@ -1,8 +1,11 @@
-package com.example.alex.myrestaurant;
+package com.example.alex.myrestaurant.services;
 
 /**
  * Created by alex on 5/29/17.
  */
+import com.example.alex.myrestaurant.Constants;
+import com.example.alex.myrestaurant.models.Restaurant;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,9 +19,6 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer;
-import se.akerfeldt.okhttp.signpost.SigningInterceptor;
-
 
 
 public class YelpService {
