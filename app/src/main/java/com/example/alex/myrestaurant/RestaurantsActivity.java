@@ -24,7 +24,7 @@ import okhttp3.Response;
 
 public class RestaurantsActivity extends AppCompatActivity {
     public static final String TAG = RestaurantsActivity.class.getSimpleName();
-    
+
     @Bind(R.id.locationTextView)
     TextView mLocationTextView;
     @Bind(R.id.listView)
@@ -54,6 +54,7 @@ public class RestaurantsActivity extends AppCompatActivity {
         String location = intent.getStringExtra("location");
 
         mLocationTextView.setText("Here are all the restaurants near: " + location);
+        getRestaurants(location);
     }
 
     private void getRestaurants(String location) {

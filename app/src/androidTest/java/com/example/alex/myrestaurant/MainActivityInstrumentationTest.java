@@ -22,13 +22,13 @@ public class MainActivityInstrumentationTest {
         onView(withId(R.id.locationEditText)).perform(typeText("Portland"))
                 .check(matches(withText("Portland")));
     }
-
-    @Test
-    public void locationIsSentToRestaurantActivity() {
-        String location = "Portland";
-        onView(withId(R.id.locationEditText)).perform(typeText(location));
-        onView(withId(R.id.findRestaurantsbutton)).perform(click());
-        onView(withId(R.id.locationTextView)).check(matches
-                (withText("Here are all the restaurants near: " + location)));
-    }
+//
+//    @Test
+//    public void locationIsSentToRestaurantActivity() {
+//        String location = "Portland";
+//        onView(withId(R.id.locationEditText)).perform(typeText(location));
+//        onView(withId(R.id.findRestaurantsbutton)).perform(click());
+//        onView(withId(R.id.locationTextView)).check(matches
+//                (withText("Here are all the restaurants near: " + location)));
+//    }
 }
