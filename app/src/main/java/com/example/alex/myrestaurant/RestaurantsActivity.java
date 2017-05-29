@@ -17,6 +17,7 @@ import java.io.IOException;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -29,6 +30,8 @@ public class RestaurantsActivity extends AppCompatActivity {
     TextView mLocationTextView;
     @Bind(R.id.listView)
     ListView mListView;
+
+    public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
 
     private String[] restaurants = new String[]{"Sweet Hereafter", "Cricket", "Hawthorne Fish House", "Viking Soul Food",
             "Red Square", "Horse Brass", "Dick's Kitchen", "Taco Bell", "Me Kha Noodle Bar",
@@ -70,7 +73,11 @@ public class RestaurantsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) throws IOException {
                 try {
                     String jsonData = response.body().string();
-                    Log.v(TAG, jsonData);
+                    if (response.isSuccessful()) {
+                        Log.v(TAG, jsonData);
+                        mRestaurants = yelpService.processResults(response);
+                    }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
