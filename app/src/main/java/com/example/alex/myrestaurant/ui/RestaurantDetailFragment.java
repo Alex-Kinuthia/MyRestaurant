@@ -26,18 +26,25 @@ import butterknife.ButterKnife;
  */
 
 public class RestaurantDetailFragment extends Fragment {
-
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 300;
 
-    @Bind(R.id.restaurantImageView) ImageView mImageLabel;
-    @Bind(R.id.restaurantNameTextView) TextView mNameLabel;
-    @Bind(R.id.cuisineTextView) TextView mCategoriesLabel;
-    @Bind(R.id.ratingTextView) TextView mRatingLabel;
-    @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
-    @Bind(R.id.phoneTextView) TextView mPhoneLabel;
-    @Bind(R.id.addressTextView) TextView mAddressLabel;
-    @Bind(R.id.saveRestaurantButton) TextView mSaveRestaurantButton;
+    @Bind(R.id.restaurantImageView)
+    ImageView mImageLabel;
+    @Bind(R.id.restaurantNameTextView)
+    TextView mNameLabel;
+    @Bind(R.id.cuisineTextView)
+    TextView mCategoriesLabel;
+    @Bind(R.id.ratingTextView)
+    TextView mRatingLabel;
+    @Bind(R.id.websiteTextView)
+    TextView mWebsiteLabel;
+    @Bind(R.id.phoneTextView)
+    TextView mPhoneLabel;
+    @Bind(R.id.addressTextView)
+    TextView mAddressLabel;
+    @Bind(R.id.saveRestaurantButton)
+    TextView mSaveRestaurantButton;
 
     private Restaurant mRestaurant;
 
@@ -59,11 +66,15 @@ public class RestaurantDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_restaurant_detail, container, false);
         ButterKnife.bind(this, view);
-        Picasso.with(view.getContext())
-                .load(mRestaurant.getImageUrl())
-                .resize(MAX_WIDTH, MAX_HEIGHT)
-                .centerCrop()
-                .into(mImageLabel);
+
+        if (!(mRestaurant.getImageUrl().isEmpty())) {
+            Picasso.with(view.getContext())
+                    .load(mRestaurant.getImageUrl())
+                    .fit()
+//                .resize(MAX_WIDTH, 0)
+                    .centerCrop()
+                    .into(mImageLabel);
+        }
 
         mNameLabel.setText(mRestaurant.getName());
         mCategoriesLabel.setText(android.text.TextUtils.join(", ", mRestaurant.getCategories()));
