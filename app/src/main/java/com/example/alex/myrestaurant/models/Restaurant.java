@@ -25,7 +25,7 @@ public class Restaurant {
         this.mPhone = phone;
         this.mWebsite = website;
         this.mRating = rating;
-        this.mImageUrl = imageUrl;
+        this.mImageUrl = getLargeImageUrl(imageUrl);
         this.mAddress = address;
         this.mLatitude = latitude;
         this.mLongitude = longitude;
@@ -44,13 +44,14 @@ public class Restaurant {
         return  mWebsite;
     }
 
+    public String getImageUrl(){
+        return mImageUrl;
+    }
+
     public double getRating() {
         return mRating;
     }
 
-    public String getImageUrl(){
-        return mImageUrl;
-    }
 
     public ArrayList<String> getAddress() {
         return mAddress;
@@ -67,4 +68,12 @@ public class Restaurant {
     public ArrayList<String> getCategories() {
         return mCategories;
     }
+
+    public String getLargeImageUrl(String imageUrl) {
+        String largeImageUrl = imageUrl.substring(0, imageUrl.length() - 6).concat("kup.jpg");
+        return largeImageUrl;
+    }
+
+
 }
+
