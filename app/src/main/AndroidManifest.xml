@@ -26,7 +26,9 @@
                 android:value="com.example.alex.myrestaurant.ui.MainActivity" />
         </activity>
         <activity android:name=".ui.RestaurantDetailActivity" />
-        <activity android:name=".ui.SavedRestaurantListActivity"></activity>
+        <activity android:name=".ui.SavedRestaurantListActivity" />
+        <activity android:name=".ui.CreateAccountActivity" />
+        <activity android:name=".ui.LoginActivity"></activity>
     </application>
 
 </manifest>
