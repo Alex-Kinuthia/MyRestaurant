@@ -25,16 +25,12 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    @Bind(R.id.findRestaurantsButton)
-    Button mFindRestaurantsButton;
-    @Bind(R.id.locationEditText)
-    EditText mLocationEditText;
-    @Bind(R.id.appNameTextView)
-    TextView mAppNameTextView;
-    @Bind(R.id.savedRestaurantsButton)
-    Button mSavedRestaurantsButton;
+    @Bind(R.id.findRestaurantsButton) Button mFindRestaurantsButton;
+    @Bind(R.id.appNameTextView) TextView mAppNameTextView;
+    @Bind(R.id.savedRestaurantsButton) Button mSavedRestaurantsButton;
 
-        @Override
+
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
