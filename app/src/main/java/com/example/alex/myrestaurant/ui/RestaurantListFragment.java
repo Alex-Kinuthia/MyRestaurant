@@ -34,7 +34,8 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class RestaurantListFragment extends Fragment {
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+    @Bind(R.id.recyclerView)
+    RecyclerView mRecyclerView;
 
     private RestaurantListAdapter mAdapter;
     public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
@@ -130,5 +131,4 @@ public class RestaurantListFragment extends Fragment {
     private void addToSharedPreferences(String location) {
         mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
     }
-
 }
