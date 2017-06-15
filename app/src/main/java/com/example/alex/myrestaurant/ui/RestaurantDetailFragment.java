@@ -37,22 +37,14 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
     private static final int MAX_WIDTH = 400;
     private static final int MAX_HEIGHT = 300;
 
-    @Bind(R.id.restaurantImageView)
-    ImageView mImageLabel;
-    @Bind(R.id.restaurantNameTextView)
-    TextView mNameLabel;
-    @Bind(R.id.cuisineTextView)
-    TextView mCategoriesLabel;
-    @Bind(R.id.ratingTextView)
-    TextView mRatingLabel;
-    @Bind(R.id.websiteTextView)
-    TextView mWebsiteLabel;
-    @Bind(R.id.phoneTextView)
-    TextView mPhoneLabel;
-    @Bind(R.id.addressTextView)
-    TextView mAddressLabel;
-    @Bind(R.id.saveRestaurantButton)
-    TextView mSaveRestaurantButton;
+    @Bind(R.id.restaurantImageView) ImageView mImageLabel;
+    @Bind(R.id.restaurantNameTextView) TextView mNameLabel;
+    @Bind(R.id.cuisineTextView) TextView mCategoriesLabel;
+    @Bind(R.id.ratingTextView) TextView mRatingLabel;
+    @Bind(R.id.websiteTextView) TextView mWebsiteLabel;
+    @Bind(R.id.phoneTextView) TextView mPhoneLabel;
+    @Bind(R.id.addressTextView) TextView mAddressLabel;
+    @Bind(R.id.saveRestaurantButton) TextView mSaveRestaurantButton;
 
     private Restaurant mRestaurant;
 
@@ -75,13 +67,11 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_restaurant_detail, container, false);
         ButterKnife.bind(this, view);
 
-
         Picasso.with(view.getContext())
                 .load(mRestaurant.getImageUrl())
                 .resize(MAX_WIDTH, MAX_HEIGHT)
                 .centerCrop()
                 .into(mImageLabel);
-
 
         mNameLabel.setText(mRestaurant.getName());
         mCategoriesLabel.setText(android.text.TextUtils.join(", ", mRestaurant.getCategories()));
@@ -100,17 +90,19 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
+
         if (v == mWebsiteLabel) {
-            Intent webIntent;
-            webIntent = new Intent(Intent.ACTION_VIEW,
+            Intent webIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse(mRestaurant.getWebsite()));
             startActivity(webIntent);
         }
+
         if (v == mPhoneLabel) {
             Intent phoneIntent = new Intent(Intent.ACTION_DIAL,
                     Uri.parse("tel:" + mRestaurant.getPhone()));
             startActivity(phoneIntent);
         }
+
         if (v == mAddressLabel) {
             Intent mapIntent = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("geo:" + mRestaurant.getLatitude()
@@ -118,6 +110,7 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
                             + "?q=(" + mRestaurant.getName() + ")"));
             startActivity(mapIntent);
         }
+
         if (v == mSaveRestaurantButton) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             String uid = user.getUid();
@@ -134,6 +127,7 @@ public class RestaurantDetailFragment extends Fragment implements View.OnClickLi
 
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
-    }
-}
 
+    }
+
+}

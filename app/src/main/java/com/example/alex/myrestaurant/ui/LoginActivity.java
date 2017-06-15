@@ -50,6 +50,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (view == mPasswordLoginButton) {
             loginWithPassword();
         }
+        if (view == mRegisterTextView) {
+            Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void loginWithPassword() {

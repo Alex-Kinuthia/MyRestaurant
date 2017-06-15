@@ -27,6 +27,7 @@ import butterknife.ButterKnife;
  * Created by alex on 5/30/17.
  */
 
+
 public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAdapter.RestaurantViewHolder> {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
@@ -73,10 +74,10 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
         }
 
         public void bindRestaurant(Restaurant restaurant) {
+
             Picasso.with(mContext)
                     .load(restaurant.getImageUrl())
-                    .fit()
-//                    .resize(MAX_WIDTH, MAX_HEIGHT)
+                    .resize(MAX_WIDTH, MAX_HEIGHT)
                     .centerCrop()
                     .into(mRestaurantImageView);
 
@@ -87,11 +88,12 @@ public class RestaurantListAdapter extends RecyclerView.Adapter<RestaurantListAd
 
         @Override
         public void onClick(View v) {
-            Log.d("click listener", "working!");
             int itemPosition = getLayoutPosition();
+
             Intent intent = new Intent(mContext, RestaurantDetailActivity.class);
             intent.putExtra("position", itemPosition + "");
             intent.putExtra("restaurants", Parcels.wrap(mRestaurants));
+
             mContext.startActivity(intent);
         }
     }

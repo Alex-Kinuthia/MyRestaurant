@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.alex.myrestaurant.ui.SavedRestaurantListActivity">
+    tools:context=".ui.RestaurantListActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <fragment
+        android:id="@+id/fragmentRestaurantList"
+        android:name="com.example.alex.myrestaurant.ui.SavedRestaurantListFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/fragment_restaurant_list" />
+
+</RelativeLayout>

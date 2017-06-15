@@ -1,72 +1,78 @@
 package com.example.alex.myrestaurant.ui;
 
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.media.session.MediaControllerCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.SearchView;
 
-
-import com.example.alex.myrestaurant.Constants;
 import com.example.alex.myrestaurant.R;
+import com.example.alex.myrestaurant.Constants;
 import com.example.alex.myrestaurant.adapters.RestaurantListAdapter;
 import com.example.alex.myrestaurant.models.Restaurant;
 import com.example.alex.myrestaurant.services.YelpService;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import java.io.IOException;
-
-
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.Response;
-public class RestaurantListActivity extends AppCompatActivity {
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
-    private String mRecentAddress;
 
+public class RestaurantListFragment extends Fragment {
     @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
     private RestaurantListAdapter mAdapter;
     public ArrayList<Restaurant> mRestaurants = new ArrayList<>();
+    private SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor mEditor;
+    private String mRecentAddress;
+
+    public RestaurantListFragment() {
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurants);
-        ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mEditor = mSharedPreferences.edit();
 
-        getRestaurants(location);
+        setHasOptionsMenu(true);
+    }
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_restaurant_list, container, false);
+        ButterKnife.bind(this, view);
         mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
 
         if (mRecentAddress != null) {
             getRestaurants(mRecentAddress);
         }
+
+        return view;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_search, menu);
-        ButterKnife.bind(this);
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mEditor = mSharedPreferences.edit();
 
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
@@ -84,10 +90,7 @@ public class RestaurantListActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
-
         });
-
-        return true;
     }
 
     @Override
@@ -95,7 +98,7 @@ public class RestaurantListActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getRestaurants(String location) {
+    public void getRestaurants(String location) {
         final YelpService yelpService = new YelpService();
 
         yelpService.findRestaurants(location, new Callback() {
@@ -109,14 +112,13 @@ public class RestaurantListActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
                 mRestaurants = yelpService.processResults(response);
 
-                RestaurantListActivity.this.runOnUiThread(new Runnable() {
+                getActivity().runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
-                        mAdapter = new RestaurantListAdapter(getApplicationContext(), mRestaurants);
+                        mAdapter = new RestaurantListAdapter(getActivity(), mRestaurants);
                         mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager =
-                                new LinearLayoutManager(RestaurantListActivity.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
                     }
